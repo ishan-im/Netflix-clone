@@ -61,7 +61,6 @@ export const getVideos = (searchQuery) =>{
 
 }
 
-
 export const getPopularVideos = () =>{
 
 const URL = `videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&maxResults=50&regionCode=IN`

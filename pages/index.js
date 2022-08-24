@@ -41,7 +41,7 @@ export default function Home({disneyVideos, productivityVideos, travelVideos, po
   return (
     <div>
       
-      <NavBar userName='Ishan'/>
+      <NavBar/>
       <Banner
         title="The Sandman"
         subTitle="Dreams of Eternals"

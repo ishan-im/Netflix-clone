@@ -1,6 +1,6 @@
 import styles from './Navbar.module.css'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import Link from 'next/link'
 
@@ -8,7 +8,38 @@ import Image from 'next/image'
 
 import {useRouter} from 'next/router'
 
-const NavBar = ({userName})=>{
+import { magic } from '../../library/magic-client'
+
+const NavBar = ()=>{
+
+    const [userName, setUserName]=useState('');
+
+    useEffect(() => {
+        // Assumes a user is already logged in
+
+        (async ()=>{
+
+            try {
+
+                const { email } = await magic.user.getMetadata();
+
+                if(email){
+                    setUserName(email);
+                }
+                
+
+            } catch(error) {
+                // Handle errors if required!
+    
+                console.error('Error retrieving email', error);
+            }
+        }) ();
+       
+
+        return () => {
+            console.log("This will be logged on unmount");
+          }
+    }, [])
 
     const router = useRouter();
 
@@ -32,6 +63,22 @@ const NavBar = ({userName})=>{
         e.preventDefault();
         setShowDropDown(!showDropDown);
 
+    }
+
+
+    const handleSignOut = async (e)=>{
+
+        e.preventDefault();
+
+        try {
+            await magic.user.logout();
+            console.log(await magic.user.isLoggedIn()); // => `false`
+             router.push('/login');
+          } catch(error) {
+            // Handle errors if required!
+            console.error('Error logging out user', error);
+            router.push('/login');
+          }
     }
 
     return (
@@ -74,8 +121,8 @@ const NavBar = ({userName})=>{
                    ( 
                    <div className={styles.navDropdown}>
                         <div>
-                        <Link href='/login'>
-                         <a className={styles.linkName}>Sign Out</a>
+                        <Link href='/login'  >
+                         <a  className={styles.linkName} onClick={handleSignOut}>Sign Out</a>
                         </Link>
                         <div className={styles.lineWrapper}></div>
                     </div>
