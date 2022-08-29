@@ -2,15 +2,21 @@ import Image from "next/image";
 
 import styles from "./banner.module.css";
 
+import { useRouter } from "next/router";
+
 import playButton from '../../public/static/play.svg';
 
 const Banner = ( { title, subTitle, imageUrl, videoId }) => {
  
- 
+ const router = useRouter();
 
   const handleOnPlay = () => {
     console.log('cliccked');
+    router.push(`/video/${videoId}`);
   };
+
+
+
   return (
     <div className={styles.container}>
       <div className={styles.leftWrapper}>

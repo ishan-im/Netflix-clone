@@ -46,6 +46,7 @@ export default function Home({disneyVideos, productivityVideos, travelVideos, po
         title="The Sandman"
         subTitle="Dreams of Eternals"
         imageUrl="./static/the-sandman.jpg"
+        videoId="4zH5iYM4wJo"
       />
 
     <div className={styles.sectionWrapper}>
@@ -55,6 +56,7 @@ export default function Home({disneyVideos, productivityVideos, travelVideos, po
     <SectionCards title='Popular' videos={popularVideos} size='small'/> 
     </div>
      
+   
     
     </div>
   );

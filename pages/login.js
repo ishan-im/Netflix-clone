@@ -53,9 +53,6 @@ const Login = () =>{
         e.preventDefault();
         
         if(email){
-
-            if(email === 'ishanmondal985@gmail.com'){
-                console.log('Login Successful');
                 // router.push('/');
                 try {
 
@@ -63,23 +60,23 @@ const Login = () =>{
                    
                 const didToken =  await magic.auth.loginWithMagicLink({ email});
 
-                console.log(didToken);
-
                 if(didToken){
+
+                    console.log(didToken);
                     
                     router.push('/');
+
+                    console.log('Login Successful');
                     
                 }
                   
                 } catch (error){
                     // Handle errors if required!
                     setIsLoading(false)
+                    setUserMsg('Something went wrong!');
                     console.error('Something went wrong!', error);
                   }
-            }else{
-                setIsLoading(false)
-                setUserMsg('Something went wrong, login failed:(');
-            }
+           
             //route to dashboard
         }else{
             //show user message

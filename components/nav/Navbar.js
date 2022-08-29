@@ -70,6 +70,10 @@ const NavBar = ()=>{
 
         e.preventDefault();
 
+        if(await magic.user.isLoggedIn()){
+
+            console.log(await magic.user.isLoggedIn());
+
         try {
             await magic.user.logout();
             console.log(await magic.user.isLoggedIn()); // => `false`
@@ -79,6 +83,7 @@ const NavBar = ()=>{
             console.error('Error logging out user', error);
             router.push('/login');
           }
+        }
     }
 
     return (
